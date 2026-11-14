@@ -2,6 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/works/:slug", "destination": "/:slug.html" }
+    { "source": "/works/connected-fellows", "destination": "/connected-fellows" },
+    { "source": "/works/synapp", "destination": "/synapp" }
   ]
 }
