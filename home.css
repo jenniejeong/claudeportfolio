@@ -115,3 +115,4 @@
 :is(.site,body) .tags .tag.proj.clv,:is(.site,body) .tags .tag.proj.clv:hover,:is(.site,body) .tags .tag.proj.clv[data-held]{background:linear-gradient(115deg,#2E6B2B 0%,#5DA653 55%,#BFE3A8 120%);color:#fff}
 :is(.site,body) .veil[data-hot="clv"] .ring,:is(.site,body) .veil[data-hot="clv"] .burst{background:linear-gradient(115deg,#2E6B2B 0%,#5DA653 55%,#BFE3A8 120%)}
 .about .copy .big{font-size:18px;line-height:1.6;max-width:52ch}
+.about .portrait{width:100%;max-width:min(380px,50vh);aspect-ratio:4/5;justify-self:center;align-self:center}
