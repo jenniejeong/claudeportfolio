@@ -328,5 +328,36 @@
         new Promise((r) => setTimeout(r, 2500))
       ])
     : Promise.resolve();
-  ready.then(() => { fitHeadline(); initIntro(); initPhysics(); });
+  /* ---------- hero headline: letters lift toward the cursor ---------- */
+  function initHeroHover() {
+    const gsap = window.gsap, hero = document.querySelector('.hero');
+    if (!gsap || !hero || reduced || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if (!document.getElementById('jj-ch-style')) {
+      const st = document.createElement('style'); st.id = 'jj-ch-style';
+      st.textContent = '.headline .wd{display:inline-block;white-space:nowrap}.headline .ch{display:inline-block;will-change:transform;transform-origin:50% 80%}';
+      document.head.appendChild(st);
+    }
+    const qs = Array.prototype.slice.call(hero.querySelectorAll('.headline .ch')).map((el) => ({
+      el: el,
+      y: gsap.quickTo(el, 'y', { duration: 0.55, ease: 'power3.out' }),
+      r: gsap.quickTo(el, 'rotate', { duration: 0.55, ease: 'power3.out' }),
+      s: gsap.quickTo(el, 'scale', { duration: 0.55, ease: 'power3.out' })
+    }));
+    if (!qs.length) return;
+    const R = 220;
+    const move = (e) => {
+      for (const q of qs) {
+        const b = q.el.getBoundingClientRect(), fs = b.height || 40;
+        const cx = b.left + b.width / 2, cy = b.top + b.height / 2 - (gsap.getProperty(q.el, 'y') || 0);
+        const dx = cx - e.clientX, dy = cy - e.clientY, d = Math.hypot(dx, dy);
+        let t = Math.max(0, 1 - d / R); t = t * t * (3 - 2 * t);
+        q.y(-0.12 * fs * t); q.r((dx / R) * 8 * t); q.s(1 + 0.05 * t);
+      }
+    };
+    const leave = () => { for (const q of qs) { q.y(0); q.r(0); q.s(1); } };
+    hero.addEventListener('pointermove', move);
+    hero.addEventListener('pointerleave', leave);
+  }
+
+  ready.then(() => { fitHeadline(); initIntro(); initPhysics(); initHeroHover(); });
 })();

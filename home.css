@@ -104,3 +104,14 @@
 .spin{animation:spin 22s linear infinite;transform-origin:50% 50%}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.spin{animation:none}}
+/* corners: tight at rest, rounder on hover */
+.frame,.wimg,.peek-in,.about .portrait,.about .portrait .ph,.cs-hero .cover,.psr article,.stat,.callout,.goal,.sw,.metric,.ph,.next .img{border-radius:8px;transition:border-radius .5s cubic-bezier(.2,.7,.2,1)}
+.peek-img,.pic img,.ph-img{border-radius:6px;transition:border-radius .5s cubic-bezier(.2,.7,.2,1)}
+.about .portrait>div{border-radius:inherit!important}
+.wcard:hover .wimg,.frame:hover,.about .portrait:hover,.about .portrait:hover .ph,.cs-hero .cover:hover,.psr article:hover,.stat:hover,.callout:hover,.goal:hover,.sw:hover,.metric:hover,.ph:hover,.next a:hover .img,.next .img:hover{border-radius:28px}
+.pic img:hover,.ph:hover .ph-img{border-radius:22px}
+:is(.site,body) .tags .tag.proj.syn,:is(.site,body) .tags .tag.proj.syn:hover,:is(.site,body) .tags .tag.proj.syn[data-held]{background:linear-gradient(115deg,#050505 0%,#1A1A1A 55%,#F2C230 130%);color:#FFD23F;text-shadow:0 0 14px rgba(255,210,63,.55)}
+:is(.site,body) .veil[data-hot="syn"] .ring,:is(.site,body) .veil[data-hot="syn"] .burst{background:linear-gradient(115deg,#050505 0%,#1A1A1A 55%,#F2C230 130%)}
+:is(.site,body) .tags .tag.proj.clv,:is(.site,body) .tags .tag.proj.clv:hover,:is(.site,body) .tags .tag.proj.clv[data-held]{background:linear-gradient(115deg,#2E6B2B 0%,#5DA653 55%,#BFE3A8 120%);color:#fff}
+:is(.site,body) .veil[data-hot="clv"] .ring,:is(.site,body) .veil[data-hot="clv"] .burst{background:linear-gradient(115deg,#2E6B2B 0%,#5DA653 55%,#BFE3A8 120%)}
+.about .copy .big{font-size:18px;line-height:1.6;max-width:52ch}

@@ -126,3 +126,9 @@
 .next .img img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
 .next:hover .img img{transform:scale(1.05)}
 @media (max-width:900px){.next .t,.next .img{grid-column:1 / -1}}
+/* corners: tight at rest, rounder on hover */
+.frame,.wimg,.peek-in,.about .portrait,.about .portrait .ph,.cs-hero .cover,.psr article,.stat,.callout,.goal,.sw,.metric,.ph,.next .img{border-radius:8px;transition:border-radius .5s cubic-bezier(.2,.7,.2,1)}
+.peek-img,.pic img,.ph-img{border-radius:6px;transition:border-radius .5s cubic-bezier(.2,.7,.2,1)}
+.about .portrait>div{border-radius:inherit!important}
+.wcard:hover .wimg,.frame:hover,.about .portrait:hover,.about .portrait:hover .ph,.cs-hero .cover:hover,.psr article:hover,.stat:hover,.callout:hover,.goal:hover,.sw:hover,.metric:hover,.ph:hover,.next a:hover .img,.next .img:hover{border-radius:28px}
+.pic img:hover,.ph:hover .ph-img{border-radius:22px}

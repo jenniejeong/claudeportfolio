@@ -93,7 +93,39 @@
     });
   }
 
+
+  /* ---------- footer photo trail (mouse only) ---------- */
+  function initTrail() {
+    const gsap = window.gsap, foot = document.querySelector('.foot'), trail = foot && foot.querySelector('.trail');
+    if (!gsap || !trail || reduced || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    const imgs = Array.prototype.slice.call(trail.querySelectorAll('img'));
+    let i = 0, z = 1, last = null;
+    const q = [];
+    let lastOut = 0;
+    const out = (el) => gsap.to(el, { opacity: 0, scale: 0.98, duration: 0.16, ease: 'power1.in', overwrite: 'auto' });
+    const tick = () => {
+      const t = performance.now();
+      while (q.length > 6) { out(q.shift().el); lastOut = t; }
+      if (q.length && t - lastOut > 45 && t - q[0].t > 110) { out(q.shift().el); lastOut = t; }
+    };
+    gsap.ticker.add(tick);
+    foot.addEventListener('pointermove', (e) => {
+      const r = foot.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+      if (last && Math.hypot(x - last.x, y - last.y) < 55) return;
+      last = { x: x, y: y };
+      const el = imgs[i % imgs.length]; i++;
+      gsap.killTweensOf(el);
+      el.style.zIndex = ++z;
+      gsap.set(el, { x: x - el.offsetWidth / 2, y: y - el.offsetHeight / 2, rotate: (Math.random() - 0.5) * 6, scale: 0.97, opacity: 0 });
+      gsap.to(el, { opacity: 1, scale: 1, duration: 0.18, ease: 'power2.out' });
+      for (let k = q.length - 1; k >= 0; k--) if (q[k].el === el) q.splice(k, 1);
+      q.push({ el: el, t: performance.now() });
+    });
+    foot.addEventListener('pointerleave', () => { last = null; });
+  }
+
   initCursor();
   initMagnet();
   initReveals();
+  initTrail();
 })();
